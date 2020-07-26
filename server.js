@@ -2,12 +2,12 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 
+
 const PORT = process.env.PORT || 3000;
 
 const db = require("./models");
 
 const app = express();
-
 app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +16,16 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutTrackerDB", { useNewUrlParser: true });
+
+app.get("/exercise", function (req, res) {
+    res.sendFile(__dirname + "/public/exercise.html")
+});
+
+app.get("/stats", (req, res) => {
+    res.sendFile(__dirname + "/public/stats.html")
+});
+
+
 
 // db.User.create({ name: "Ernest Hemingway" })
 //   .then(dbUser => {
@@ -72,7 +82,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutTrackerD
 //   // TIP: Check the models out to see how the Notes refers to the User
 // });
 
-// // Start the server
-// app.listen(PORT, () => {
-//   console.log(`App running on port ${PORT}!`);
-// });
+// Start the server
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}!`);
+});
