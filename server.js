@@ -25,19 +25,19 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/populatedb", { 
 //     console.log(message);
 //   });
 
-app.get("/notes", (req, res) => {
-  db.Note.find({})
-    .then(dbNote => {
-      res.json(dbNote);
+app.get("/workouts", (req, res) => {
+  db.Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
     })
     .catch(err => {
       res.json(err);
     });
 });
 
-app.get("/user", (req, res) => {
-  db.User.find({})
-    .then(dbUser => {
+app.get("/exercise", (req, res) => {
+  db.Exercise.find({})
+    .then(dbExercise => {
       res.json(dbUser);
     })
     .catch(err => {
