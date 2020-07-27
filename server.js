@@ -25,6 +25,26 @@ app.get("/stats", (req, res) => {
     res.sendFile(__dirname + "/public/stats.html")
 });
 
+//Add to an Existing Workout
+app.put("/api/workouts/:id", (req, res) => {
+    db.workout.update({ _id: mongojs.Object(req.params.id) }, {
+        type: req.body.type,
+        name: req.body.name,
+        weight: req.body.weight,
+        sets: req.body.sets,
+        duration: req.body.duration,
+        distance: req.body.distance
+    }, (err, data) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.json(data);
+        }
+    }) 
+})
+
+
+
 
 
 // db.User.create({ name: "Ernest Hemingway" })
@@ -84,5 +104,5 @@ app.get("/stats", (req, res) => {
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+    console.log(`App running on port ${PORT}!`);
 });
