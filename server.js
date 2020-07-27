@@ -27,7 +27,7 @@ app.get("/stats", (req, res) => {
 
 //Add to an Existing Workout
 app.put("/api/workouts/:id", (req, res) => {
-    db.workout.update({ _id: mongojs.Object(req.params.id) }, {
+    db.workouts.update({ _id: mongojs.Object(req.params.id) }, {
         type: req.body.type,
         name: req.body.name,
         weight: req.body.weight,
@@ -43,8 +43,35 @@ app.put("/api/workouts/:id", (req, res) => {
     }) 
 })
 
+app.post("/api/workouts", (req, res) => {
+    db.workouts.insert(req.body, (err, data) => {
+        if(err) {
+            console.log(err)
+        } else {
+            res.json(data)
+        }
+    });
+});
 
+app.get("/api/workouts/:id", (req, res) => {
+    db.workouts.findOne({ _id: mongojs.ObjectId (req.params.id)}, (err, data) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(data)
+        }
+    })
+})
 
+app.get("/api/workouts/range", (req, res) => {
+    db.workouts.find({}, (err, data) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.json(data)
+        }
+    })
+})
 
 
 // db.User.create({ name: "Ernest Hemingway" })
