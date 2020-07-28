@@ -25,23 +25,6 @@ app.get("/stats", (req, res) => {
     res.sendFile(__dirname + "/public/stats.html")
 });
 
-//Add to an Existing Workout
-// app.put("/api/workouts/:id", (req, res) => {
-//     db.Workout.update({ _id: mongojs.Object(req.params.id) }, {
-//         type: req.body.type,
-//         name: req.body.name,
-//         weight: req.body.weight,
-//         sets: req.body.sets,
-//         duration: req.body.duration,
-//         distance: req.body.distance
-//     }, (err, data) => {
-//         if(err){
-//             console.log(err);
-//         } else {
-//             res.json(data);
-//         }
-//     }) 
-// })
 //Adds to an existing workout
 app.put("/api/workouts/:id", ({body, params}, res) => {
     db.Exercise.create(body)
@@ -55,15 +38,6 @@ app.put("/api/workouts/:id", ({body, params}, res) => {
 })
 
 //adds a new workout
-// app.post("/api/workouts", (req, res) => {
-//     db.Workout.create(req.body, (err, data) => {
-//         if(err) {
-//             console.log(err)
-//         } else {
-//             res.json(data)
-//         }
-//     });
-// });
 app.post("/api/workouts", (req, res) => {
     db.Workout.create({})
     .then(dbWorkout => {
@@ -74,17 +48,7 @@ app.post("/api/workouts", (req, res) => {
     })
 })
 
-
 //Get Last Workout
-// app.get("/api/workouts/:id", (req, res) => {
-//     db.Workout.findOne({ _id: mongojs.ObjectId (req.params.id)}, (err, data) => {
-//         if (err) {
-//             console.log(err);
-//         } else {
-//             res.json(data)
-//         }
-//     })
-// })
 app.get("/api/workouts" , (req,res) => {
     db.Workout.find({})
     .then(dbWorkout => {
@@ -105,71 +69,6 @@ app.get("/api/workouts/range", (req,res) => {
         res.json(err);
     })
 })
-// app.get("/api/workouts/range", (req, res) => {
-//     db.Workout.find({}, (err, data) => {
-//         if(err){
-//             console.log(err);
-//         } else {
-//             res.json(data)
-//         }
-//     })
-// })
-
-
-// db.User.create({ name: "Ernest Hemingway" })
-//   .then(dbUser => {
-//     console.log(dbUser);
-//   })
-//   .catch(({ message }) => {
-//     console.log(message);
-//   });
-
-// app.get("/workouts", (req, res) => {
-//   db.Workout.find({})
-//     .then(dbWorkout => {
-//       res.json(dbWorkout);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/exercise", (req, res) => {
-//   db.Exercise.find({})
-//     .then(dbExercise => {
-//       res.json(dbUser);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.post("/submit", ({ body }, res) => {
-//   db.Note.create(body)
-//     .then(({ _id }) => db.User.findOneAndUpdate({}, { $push: { notes: _id } }, { new: true }))
-//     .then(dbUser => {
-//       res.json(dbUser);
-//     })
-//     .catch(err => {
-//       res.json(err);
-//     });
-// });
-
-// app.get("/populateduser", (req, res) => {
-//   db.User.find({})
-//   .populate("notes")
-//   .then(dbUser => {
-//     res.json(dbUser);
-//   })
-//   .catch(err => {
-//     res.json(err);
-//   })
-//   // TODO
-//   // =====
-//   // Write the query to grab the documents from the User collection,
-//   // and populate them with any associated Notes.
-//   // TIP: Check the models out to see how the Notes refers to the User
-// });
 
 // Start the server
 app.listen(PORT, () => {
