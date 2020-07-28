@@ -65,7 +65,7 @@ app.put("/api/workouts/:id", ({body, id}, res) => {
 //     });
 // });
 app.post("/api/workouts", (req, res) => {
-    db.Workout.create()
+    db.Workout.create({})
     .then(dbWorkout => {
         res.json(dbWorkout);
     })
@@ -85,7 +85,7 @@ app.post("/api/workouts", (req, res) => {
 //         }
 //     })
 // })
-app.get("/api/workout" , (req,res) => {
+app.get("/api/workouts" , (req,res) => {
     db.Workout.find({})
     .then(dbWorkout => {
         res.json(dbWorkout);
