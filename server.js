@@ -43,10 +43,10 @@ app.get("/stats", (req, res) => {
 //     }) 
 // })
 //Adds to an existing workout
-app.put("/api/workouts/:id", ({body, id}, res) => {
+app.put("/api/workouts/:id", ({body, params}, res) => {
     db.Exercise.create(body)
     .then (({_id}) => 
-        db.Workout.findByIdAndUpdate( id, { $push: {exercises: _id } }, {new:true})
+        db.Workout.findByIdAndUpdate( params.id, { $push: {exercises: _id } }, {new:true})
     ).then(dbWorkout => {
         res.json(dbWorkout);
     }) .catch (err => {
