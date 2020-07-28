@@ -26,52 +26,94 @@ app.get("/stats", (req, res) => {
 });
 
 //Add to an Existing Workout
-app.put("/api/workouts/:id", (req, res) => {
-    db.workouts.update({ _id: mongojs.Object(req.params.id) }, {
-        type: req.body.type,
-        name: req.body.name,
-        weight: req.body.weight,
-        sets: req.body.sets,
-        duration: req.body.duration,
-        distance: req.body.distance
-    }, (err, data) => {
-        if(err){
-            console.log(err);
-        } else {
-            res.json(data);
-        }
-    }) 
+// app.put("/api/workouts/:id", (req, res) => {
+//     db.Workout.update({ _id: mongojs.Object(req.params.id) }, {
+//         type: req.body.type,
+//         name: req.body.name,
+//         weight: req.body.weight,
+//         sets: req.body.sets,
+//         duration: req.body.duration,
+//         distance: req.body.distance
+//     }, (err, data) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             res.json(data);
+//         }
+//     }) 
+// })
+//Adds to an existing workout
+app.put("/api/workouts/:id", ({body, id}, res) => {
+    db.Exercise.create(body)
+    .then (({_id}) => 
+        db.Workout.findByIdAndUpdate( id, { $push: {exercises: _id } }, {new:true})
+    ).then(dbWorkout => {
+        res.json(dbWorkout);
+    }) .catch (err => {
+        res.json(err);
+    })
 })
 
+//adds a new workout
+// app.post("/api/workouts", (req, res) => {
+//     db.Workout.create(req.body, (err, data) => {
+//         if(err) {
+//             console.log(err)
+//         } else {
+//             res.json(data)
+//         }
+//     });
+// });
 app.post("/api/workouts", (req, res) => {
-    db.workouts.insert(req.body, (err, data) => {
-        if(err) {
-            console.log(err)
-        } else {
-            res.json(data)
-        }
+    db.Workout.create()
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(({message}) => {
+        res.json(message)
+    })
+})
+
+
+//Get Last Workout
+// app.get("/api/workouts/:id", (req, res) => {
+//     db.Workout.findOne({ _id: mongojs.ObjectId (req.params.id)}, (err, data) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             res.json(data)
+//         }
+//     })
+// })
+app.get("/api/workout" , (req,res) => {
+    db.Workout.find({})
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+    }).catch (err => {
+        res.json(err);
     });
 });
 
-app.get("/api/workouts/:id", (req, res) => {
-    db.workouts.findOne({ _id: mongojs.ObjectId (req.params.id)}, (err, data) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.json(data)
-        }
+//Get for the Stats Page
+app.get("/api/workouts/range", (req,res) => {
+    db.Workout.find({})
+    .limit(7)
+    .populate("exercises")
+    .then(dbWorkout => {
+        res.json(dbWorkout);
+    }).catch(err => {
+        res.json(err);
     })
 })
-
-app.get("/api/workouts/range", (req, res) => {
-    db.workouts.find({}, (err, data) => {
-        if(err){
-            console.log(err);
-        } else {
-            res.json(data)
-        }
-    })
-})
+// app.get("/api/workouts/range", (req, res) => {
+//     db.Workout.find({}, (err, data) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             res.json(data)
+//         }
+//     })
+// })
 
 
 // db.User.create({ name: "Ernest Hemingway" })
