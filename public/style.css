@@ -13,9 +13,9 @@ body,
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-image: url("/assets/images/background.jpeg") !important;
   background-size: auto;
+  font-family: 'Lexend Zetta', sans-serif !important;
 }
 
 .cardHead {
