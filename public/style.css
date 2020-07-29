@@ -18,7 +18,7 @@ body {
   font-family: 'Lexend Zetta', sans-serif !important;
 }
 
-h1.header {
+h1.header, h3.cardHead, a {
   font-family: 'Lexend Zetta', sans-serif !important;
 }
 
@@ -26,6 +26,10 @@ h1.header {
 border-bottom: black;
 border-bottom: solid;
 text-align: center;
+}
+
+div.workout-stats {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
 }
 
 .header {
