@@ -18,6 +18,10 @@ body {
   font-family: 'Lexend Zetta', sans-serif !important;
 }
 
+h1.header {
+  font-family: 'Lexend Zetta', sans-serif !important;
+}
+
 .cardHead {
 border-bottom: black;
 border-bottom: solid;
