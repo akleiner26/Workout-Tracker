@@ -17,6 +17,10 @@ The Fitness Tracker attests to the fact that multiple technologies can be used f
   - [GitHub Photo:](#github-photo)
   - [GitHub Email:](#github-email)
   - [Screenshots](#screenshots)
+    - [Entering the Site](#entering-the-site)
+    - [Creating an Exercise](#creating-an-exercise)
+    - [Continuing Workout](#continuing-workout)
+    - [Dashboard](#dashboard)
 
 ## Installation:
 Enter NPM Install into your terminal while in the root folder.
@@ -41,3 +45,14 @@ AndrewJKleiner@gmail.com
 
 ## Screenshots
 
+### Entering the Site
+<img src="./public/assets/screenshots/homepage.png" alt="Screenshot on Entering the Site">
+
+### Creating an Exercise
+<img src="./public/assets/screenshots/creatingExercise.png" alt="Screenshot of Creating an Exercise">
+
+### Continuing Workout
+<img src="./public/assets/screenshots/continueWorkout.png" alt="Screenshot of continuing a workout">
+
+### Dashboard
+<img src="./public/assets/screenshots/dashboard.png" alt="Screenshot of the Dashboard">
