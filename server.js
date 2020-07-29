@@ -82,6 +82,7 @@ app.get("/api/workouts", (req, res) => {
 //Get for the Stats Page
 app.get("/api/workouts/range", (req, res) => {
     db.Workout.find({})
+        .sort({_id: -1})
         .limit(7)
         .populate("exercises")
         .then(dbWorkout => {
